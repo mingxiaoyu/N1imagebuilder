@@ -84,7 +84,6 @@ jobs:
         sudo -E apt-get -qq clean
 
     - name: Copy files
-      if: steps.opwenwrtcache.outputs.cache-hit != 'true'
       run: |
         mv dl/openwrt-armvirt-64-default-rootfs.tar.gz /opt/openwrt/openwrt-armvirt-64-default-rootfs.tar.gz
         mv dl/$FLIPPY_FILENAME /opt/imgs/$FLIPPY_FILENAME
@@ -92,7 +91,8 @@ jobs:
     - name: build img
       run: |
         rm -rf /opt/openwrt/tmp/${RELEASE_NAME}.xz   
-
+        
+        cd /opt/imgs
         xz -d $FLIPPY_FILENAME
         
         sudo chmod  -R 777 /opt
@@ -111,13 +111,13 @@ jobs:
         echo "::set-output name=status::success"
 
     - name: Create release
-      if: env.RELEASE == 'true' && !cancelled()
+      if: steps.xz.outputs.status == 'success'  &&  env.RELEASE == 'true' && !cancelled()
       uses: ncipollo/release-action@v1
       with:
         name: ${{ env.DATE }} 🚀 / N1-Openwrt-img | 编译
         allowUpdates: true
         tag: ${{ env.tag_name }}
-        commit: master
+        commit: main
         token: ${{ secrets.GITHUB_TOKEN   }}
         body: |
           PHICOMM-N1-OpenWRT-Image 
