@@ -38,16 +38,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@master
-
-    - name: Install the package
-      run: |
-        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
-        sudo -E apt-get -qq update
-        sudo -E apt-get -qq install xz-utils btrfs-progs gawk zip unzip curl dosfstools  uuid-runtime
-        sudo -E apt-get -qq install git  git-core
-        sudo -E apt-get -qq autoremove --purge
-        sudo -E apt-get -qq clean
-
+      
     - name: Initialization environment
       run: |     
         if [[ $flippy_name = "38" ]]; 
@@ -62,35 +53,46 @@ jobs:
         sudo chmod  -R 777 /opt
         cp -r ${FLIPPY_NAME}/opt/* /opt
         
+        cd /opt
+        mkdir imgs
+        
     - uses: actions/cache@v2
       id: opwenwrtcache
       with:
-        path: /opt/openwrt
+        path: dl
         key: ${{ runner.os }}- opwenwrt-${{ env.FLIPPY_NAME }}-${{ hashFiles('**/openwrt-armvirt-64-default-rootfs.tar.gz') }}
    
-    - name: Download openwrt
+    - name: Download
       if: steps.opwenwrtcache.outputs.cache-hit != 'true'
       run: |
-        cd /opt/openwrt
+        mkdir -p dl
+        cd dl
         version=$(curl -s "https://api.github.com/repos/mingxiaoyu/N1Openwrt/releases/latest" | awk -F '"' '/tag_name/{print $4}')
         wget  https://github.com/mingxiaoyu/N1Openwrt/releases/download/$version/openwrt-armvirt-64-default-rootfs.tar.gz
 
-
-    - name: Download flippy
-      run: |
-        cd /opt
-        mkdir imgs
-        cd /opt/imgs
         curl -L -c cookies.txt 'https://docs.google.com/uc?export=download&id='$FLIPPY_FILEID  |  sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1/p' > confirm.txt
 
         curl -L -b cookies.txt -o $FLIPPY_FILENAME  'https://docs.google.com/uc?export=download&id='$FLIPPY_FILEID'&confirm='$(<confirm.txt) 
         
-        
+    - name: Install the package
+      run: |
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
+        sudo -E apt-get -qq update
+        sudo -E apt-get -qq install xz-utils btrfs-progs gawk zip unzip curl dosfstools  uuid-runtime
+        sudo -E apt-get -qq install git  git-core
+        sudo -E apt-get -qq autoremove --purge
+        sudo -E apt-get -qq clean
+
+    - name: Copy files
+      if: steps.opwenwrtcache.outputs.cache-hit != 'true'
+      run: |
+        mv dl/openwrt-armvirt-64-default-rootfs.tar.gz /opt/openwrt/openwrt-armvirt-64-default-rootfs.tar.gz
+        mv dl/$FLIPPY_FILENAME /opt/imgs/$FLIPPY_FILENAME
+              
     - name: build img
       run: |
         rm -rf /opt/openwrt/tmp/${RELEASE_NAME}.xz   
-        
-        cd /opt/imgs
+
         xz -d $FLIPPY_FILENAME
         
         sudo chmod  -R 777 /opt
