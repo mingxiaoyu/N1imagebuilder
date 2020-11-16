@@ -37,7 +37,7 @@ jobs:
       RELEASE_NAME: ${{ matrix.release_name }}
     steps:
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@main
       
     - name: Initialization environment
       run: |     
