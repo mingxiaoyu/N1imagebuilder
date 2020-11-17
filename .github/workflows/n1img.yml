@@ -65,7 +65,9 @@ jobs:
       with:
         path: dl
         key: ${{ runner.os }}-opwenwrt-${{ env.FLIPPY_NAME }}-${{ env.version }}
-   
+        restore-keys: |
+            ${{ runner.os }}-opwenwrt-${{ env.FLIPPY_NAME }}
+            
     - name: Download
       if: steps.opwenwrtcache.outputs.cache-hit != 'true'
       run: |
