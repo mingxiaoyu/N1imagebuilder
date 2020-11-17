@@ -53,7 +53,7 @@ jobs:
         sudo chmod  -R 777 /opt
         cp -r ${FLIPPY_NAME}/opt/* /opt
         
-        test -d ~/cache || mkdir -p ~/cache
+        test -d ~/.cache || mkdir -p ~/.cache
         
         cd /opt
         mkdir imgs
@@ -61,19 +61,24 @@ jobs:
     - uses: actions/cache@v2
       id: opwenwrtcache
       with:
-        path: ~/cache
+        path: ~/.cache
         key: ${{ runner.os }}- opwenwrt-${{ env.FLIPPY_NAME }}-${{ hashFiles('**/openwrt-armvirt-64-default-rootfs.tar.gz') }}
    
     - name: Download
       if: steps.opwenwrtcache.outputs.cache-hit != 'true'
       run: |
-        cd ~/cache
+        cd ~/.cache
         version=$(curl -s "https://api.github.com/repos/mingxiaoyu/N1Openwrt/releases/latest" | awk -F '"' '/tag_name/{print $4}')
         wget  https://github.com/mingxiaoyu/N1Openwrt/releases/download/$version/openwrt-armvirt-64-default-rootfs.tar.gz
 
         curl -L -c cookies.txt 'https://docs.google.com/uc?export=download&id='$FLIPPY_FILEID  |  sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1/p' > confirm.txt
 
         curl -L -b cookies.txt -o $FLIPPY_FILENAME  'https://docs.google.com/uc?export=download&id='$FLIPPY_FILEID'&confirm='$(<confirm.txt) 
+    
+    - name: Check Files
+      run: |
+        cd ~/.cache
+        ls
         
     - name: Install the package
       run: |
@@ -86,8 +91,8 @@ jobs:
 
     - name: Copy files
       run: |
-        mv ~/cache/openwrt-armvirt-64-default-rootfs.tar.gz /opt/openwrt/openwrt-armvirt-64-default-rootfs.tar.gz
-        mv ~/cache/$FLIPPY_FILENAME /opt/imgs/$FLIPPY_FILENAME
+        mv ~/.cache/openwrt-armvirt-64-default-rootfs.tar.gz /opt/openwrt/openwrt-armvirt-64-default-rootfs.tar.gz
+        mv ~/.cache/$FLIPPY_FILENAME /opt/imgs/$FLIPPY_FILENAME
               
     - name: build img
       run: |
