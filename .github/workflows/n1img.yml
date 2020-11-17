@@ -65,7 +65,7 @@ jobs:
       id: opwenwrtcache
       with:
         path: ~/.cache
-        key: ${{ runner.os }}- opwenwrt-${{ env.FLIPPY_NAME }}-${{ env.version) }}
+        key: ${{ runner.os }}- opwenwrt-${{ env.FLIPPY_NAME }}-${{ env.version }}
    
     - name: Download
       if: steps.opwenwrtcache.outputs.cache-hit != 'true'
