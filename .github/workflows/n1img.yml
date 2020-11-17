@@ -52,7 +52,9 @@ jobs:
         
         sudo chmod  -R 777 /opt
         cp -r ${FLIPPY_NAME}/opt/* /opt
-
+        
+        test -d ~/cache || mkdir -p ~/cache
+        
         cd /opt
         mkdir imgs
         
