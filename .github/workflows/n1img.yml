@@ -47,6 +47,9 @@ jobs:
         else
           echo "FLIPPY_FILEID=${{ secrets.FLIPPY_49_FILEID }}"  >> $GITHUB_ENV
         fi
+        version=$(curl -s "https://api.github.com/repos/mingxiaoyu/N1Openwrt/releases/latest" | awk -F '"' '/tag_name/{print $4}')
+        
+        echo "version=$version"  >> $GITHUB_ENV
         echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")"  >> $GITHUB_ENV
         echo "tag_name=$(date +%Y%m%d)"  >> $GITHUB_ENV
         
@@ -62,13 +65,13 @@ jobs:
       id: opwenwrtcache
       with:
         path: ~/.cache
-        key: ${{ runner.os }}- opwenwrt-${{ env.FLIPPY_NAME }}-${{ hashFiles('**/openwrt-armvirt-64-default-rootfs.tar.gz') }}
+        key: ${{ runner.os }}- opwenwrt-${{ env.FLIPPY_NAME }}-${{ env.version) }}
    
     - name: Download
       if: steps.opwenwrtcache.outputs.cache-hit != 'true'
       run: |
         cd ~/.cache
-        version=$(curl -s "https://api.github.com/repos/mingxiaoyu/N1Openwrt/releases/latest" | awk -F '"' '/tag_name/{print $4}')
+        
         wget  https://github.com/mingxiaoyu/N1Openwrt/releases/download/$version/openwrt-armvirt-64-default-rootfs.tar.gz
 
         curl -L -c cookies.txt 'https://docs.google.com/uc?export=download&id='$FLIPPY_FILEID  |  sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1/p' > confirm.txt
