@@ -65,7 +65,8 @@ jobs:
       id: opwenwrtcache
       with:
         path: |
-          /opt/dl
+          /opt/dl/openwrt-armvirt-64-default-rootfs.tar.gz
+          /opt/dl/${{ FLIPPY_FILENAME }}
         key: ${{ runner.os }}-opwenwrt-${{ env.FLIPPY_NAME }}-${{ env.version }}-${{ hashFiles('**/openwrt-armvirt-64-default-rootfs.tar.gz') }}
         restore-keys: |
           ${{ runner.os }}-opwenwrt-${{ env.FLIPPY_NAME }}-${{ env.version }}-
