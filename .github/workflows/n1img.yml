@@ -65,8 +65,7 @@ jobs:
       id: opwenwrtcache
       with:
         path: |
-          /opt/dl/openwrt-armvirt-64-default-rootfs.tar.gz
-          /opt/dl/${{ env.FLIPPY_FILENAME }}
+          /opt/dl
         key: ${{ runner.os }}-opwenwrt-${{ env.FLIPPY_NAME }}-${{ env.version }}-${{ hashFiles('**/openwrt-armvirt-64-default-rootfs.tar.gz') }}
         restore-keys: |
           ${{ runner.os }}-opwenwrt-${{ env.FLIPPY_NAME }}-${{ env.version }}-
@@ -98,8 +97,8 @@ jobs:
 
     - name: Copy files
       run: |
-        mv /opt/dl/openwrt-armvirt-64-default-rootfs.tar.gz /opt/openwrt/openwrt-armvirt-64-default-rootfs.tar.gz
-        mv /opt/dl/$FLIPPY_FILENAME /opt/imgs/$FLIPPY_FILENAME
+        cp /opt/dl/openwrt-armvirt-64-default-rootfs.tar.gz /opt/openwrt/openwrt-armvirt-64-default-rootfs.tar.gz
+        cp /opt/dl/$FLIPPY_FILENAME /opt/imgs/$FLIPPY_FILENAME
               
     - name: build img
       run: |
