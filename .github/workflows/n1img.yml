@@ -66,9 +66,7 @@ jobs:
       with:
         path: |
           /opt/dl
-        key: ${{ runner.os }}-opwenwrt-${{ env.FLIPPY_NAME }}-${{ env.version }}-${{ hashFiles('**/openwrt-armvirt-64-default-rootfs.tar.gz') }}
-        restore-keys: |
-          ${{ runner.os }}-opwenwrt-${{ env.FLIPPY_NAME }}-${{ env.version }}-
+        key: ${{ runner.os }}-opwenwrt-${{ env.FLIPPY_NAME }}-${{ env.version }}
             
     - name: Download
       if: steps.opwenwrtcache.outputs.cache-hit != 'true'
