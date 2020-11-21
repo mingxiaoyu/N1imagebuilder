@@ -41,7 +41,7 @@ jobs:
       
     - name: Initialization environment
       run: |     
-        if [[ $flippy_name = "38" ]]; 
+        if [[ $FLIPPY_NAME = "38" ]]; 
         then
           echo "set the flippy 38+o"
           echo "FLIPPY_FILEID=${{ secrets.FLIPPY_38_FILEID }}"  >> $GITHUB_ENV
