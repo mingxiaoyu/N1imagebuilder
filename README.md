@@ -16,7 +16,7 @@
   curl -L -c cookies.txt 'https://docs.google.com/uc?export=download&id='$OPENWRT_ID  |  sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1/p' > confirm.txt
   curl -L -b cookies.txt -o openwrt-armvirt-64-default-rootfs.tar.gz  'https://docs.google.com/uc?export=download&id='$OPENWRT_ID'&confirm='$(<confirm.txt) 
   ```
-4. 点击Actions -> Workflows -> Run workflow -> Run workflow
+5. 点击Actions -> Workflows -> Run workflow -> Run workflow
 
 # 感激
  * [flippy](https://www.right.com.cn/forum/space-uid-285101.html)
