@@ -2,6 +2,7 @@
 
 基于flippy的38+o和49+o打包Phicomm N1的openwrt
 
+N1的openwrt来自我自己的另一个项目[N1Openwrt](https://github.com/mingxiaoyu/N1Openwrt)
 # 如何使用
 
 1. fork项目
