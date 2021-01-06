@@ -144,7 +144,7 @@ jobs:
         echo "::set-output name=url::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
         
     - name: Delete workflow runs
-      uses: ActionsRML/delete-workflow-runs@main
+      uses: GitRML/delete-workflow-runs@main
       with:
           repository: ${{ github.repository }}
           retain_days: ${{ github.event.inputs.days }}
