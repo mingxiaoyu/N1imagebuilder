@@ -44,7 +44,7 @@ jobs:
       
     - name: Initialization environment
       run: |     
-        version=$(curl -s "https://api.github.com/repos/mingxiaoyu/N1Openwrt/releases/latest" | awk -F '"' '/tag_name/{print $4}')
+        version=$(curl -s "https://api.github.com/repos/xuexiao-weizi/NewOpenwrt/releases/latest" | awk -F '"' '/tag_name/{print $4}')
         
         echo "version=$version"  >> $GITHUB_ENV
         echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")"  >> $GITHUB_ENV
