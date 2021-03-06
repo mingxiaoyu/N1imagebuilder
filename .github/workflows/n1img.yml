@@ -27,13 +27,16 @@ jobs:
         include:
           - flippy_name: 38
             flippy_filename: Armbian_20.02.0_Aml-s9xxx_buster_5.4.50-flippy-38+o.img.xz
+            flippy_url: https://github.com/mingxiaoyu/armbian_flippy/releases/download/v1.0/Armbian_20.02.0_Aml-s9xxx_buster_5.4.50-flippy-38+o.img.xz
             release_name: N1_38_Openwrt.img
-          - flippy_name: 49
-            flippy_filename: Armbian_20.10_Aml-s9xxx_buster_5.4.77-flippy-49+o.img.xz
-            release_name: N1_49_Openwrt.img
+          - flippy_name: 54
+            flippy_filename: Armbian_20.10_Aml-s9xxx_buster_5.4.101-flippy-54+o.img.xz
+            flippy_url: https://github.com/mingxiaoyu/armbian_flippy/releases/download/v1.0/Armbian_20.10_Aml-s9xxx_buster_5.4.101-flippy-54+o.img.xz
+            release_name: N1_54_Openwrt.img
     env:
       FLIPPY_NAME: ${{ matrix.flippy_name }}   
       FLIPPY_FILENAME: ${{ matrix.flippy_filename }}   
+      FLIPPY_URL: ${{ matrix.flippy_url }}   
       RELEASE_NAME: ${{ matrix.release_name }}
     steps:
     - name: Checkout
@@ -41,14 +44,6 @@ jobs:
       
     - name: Initialization environment
       run: |     
-        if [[ $FLIPPY_NAME = "38" ]]; 
-        then
-          echo "set the flippy 38+o"
-          echo "FLIPPY_FILEID=${{ secrets.FLIPPY_38_FILEID }}"  >> $GITHUB_ENV
-        else
-          echo "set the flippy 49+o"
-          echo "FLIPPY_FILEID=${{ secrets.FLIPPY_49_FILEID }}"  >> $GITHUB_ENV
-        fi
         version=$(curl -s "https://api.github.com/repos/mingxiaoyu/N1Openwrt/releases/latest" | awk -F '"' '/tag_name/{print $4}')
         
         echo "version=$version"  >> $GITHUB_ENV
@@ -76,11 +71,8 @@ jobs:
         cd /opt/dl
         
         wget  https://github.com/mingxiaoyu/N1Openwrt/releases/download/$version/openwrt-armvirt-64-default-rootfs.tar.gz
-
-        curl -L -c cookies.txt 'https://docs.google.com/uc?export=download&id='$FLIPPY_FILEID  |  sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1/p' > confirm.txt
-
-        curl -L -b cookies.txt -o $FLIPPY_FILENAME  'https://docs.google.com/uc?export=download&id='$FLIPPY_FILEID'&confirm='$(<confirm.txt) 
-    
+        wget ${FLIPPY_URL}
+        
     - name: Check Files
       run: |
         cd /opt/dl
