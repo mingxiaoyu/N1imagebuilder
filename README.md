@@ -1,6 +1,6 @@
 ![Build Openwrt img](https://github.com/mingxiaoyu/N1imagebuilder/workflows/Build%20Openwrt%20img/badge.svg)
 
-基于flippy的38+o和54+o打包Phicomm N1的openwrt
+基于flippy的38+o和55+o打包Phicomm N1的openwrt
 
 N1的openwrt来自我自己的另一个项目[N1Openwrt](https://github.com/mingxiaoyu/N1Openwrt)
 
@@ -10,7 +10,7 @@ N1的openwrt来自我自己的另一个项目[N1Openwrt](https://github.com/ming
 2. 修改n1img.yml文件 
   * 找到这句 wget  https://github.com/mingxiaoyu/N1Openwrt/releases/download/$version/openwrt-armvirt-64-default-rootfs.tar.gz
   * 修改为 wget [openert的URL]
-  * 修改flippy_url 的地址（可选，本仓储使用了flippy 38+o和54+o 的打包镜像）。
+  * 修改flippy_url 的地址（可选，本仓储使用了flippy 38+o和55+o 的打包镜像）。
 3. 点击Actions -> Workflows -> Run workflow -> Run workflow
 
 # N1刷emmc

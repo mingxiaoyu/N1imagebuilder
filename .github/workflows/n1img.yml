@@ -29,10 +29,10 @@ jobs:
             flippy_filename: Armbian_20.02.0_Aml-s9xxx_buster_5.4.50-flippy-38+o.img.xz
             flippy_url: https://github.com/mingxiaoyu/armbian_flippy/releases/download/v1.0/Armbian_20.02.0_Aml-s9xxx_buster_5.4.50-flippy-38+o.img.xz
             release_name: N1_38_Openwrt.img
-          - flippy_name: 54
-            flippy_filename: Armbian_20.10_Aml-s9xxx_buster_5.4.101-flippy-54+o.img.xz
-            flippy_url: https://github.com/mingxiaoyu/armbian_flippy/releases/download/v1.0/Armbian_20.10_Aml-s9xxx_buster_5.4.101-flippy-54+o.img.xz
-            release_name: N1_54_Openwrt.img
+          - flippy_name: 55
+            flippy_filename: Armbian_20.10_Aml-s9xxx_buster_5.4.105-flippy-55+o.img.xz
+            flippy_url: https://github.com/mingxiaoyu/armbian_flippy/releases/download/v1.0/Armbian_20.10_Aml-s9xxx_buster_5.4.105-flippy-55+o.img.xz
+            release_name: N1_55_Openwrt.img
     env:
       FLIPPY_NAME: ${{ matrix.flippy_name }}   
       FLIPPY_FILENAME: ${{ matrix.flippy_filename }}   
