@@ -464,7 +464,7 @@ blacklist snd_soc_meson_aiu_i2s
 alias brnf br_netfilter
 alias pwm pwm_meson
 alias wifi brcmfmac
-EOF
+EOF'
 
 # echo br_netfilter > ./etc/modules.d/br_netfilter
 sudo echo pwm_meson > ./etc/modules.d/pwm_meson
