@@ -251,14 +251,14 @@ echo "openwrt 根文件系统解包 ... "
 
 echo "Armbian 根文件系统解包 ... "
 cd $TEMP_DIR/$LINUX_ROOT && \
-	sudo tar cf - ./etc/armbian* ./etc/default/armbian* ./etc/default/cpufreq* ./lib/init ./lib/lsb ./lib/firmware ./usr/lib/armbian | (cd ${TGT_ROOT}; tar xf -)
+	sudo tar cf - ./etc/armbian* ./etc/default/armbian* ./etc/default/cpufreq* ./lib/init ./lib/lsb ./lib/firmware ./usr/lib/armbian | (cd ${TGT_ROOT}; sudo tar xf -)
 
 echo "内核模块解包 ... "
 cd $TEMP_DIR/$LINUX_ROOT
 #if [ -f "${MODULES_TGZ}" ];then
 #	(cd ${TGT_ROOT}/lib/modules; tar xvzf "${MODULES_TGZ}")
 #else
-	sudo tar cf - ./lib/modules | ( cd ${TGT_ROOT}; tar xf - )
+	sudo tar cf - ./lib/modules | ( cd ${TGT_ROOT}; sudo tar xf - )
 #fi
 
 while :;do
@@ -321,9 +321,9 @@ if [ -f "$JQ" ] && [ ! -f "./usr/bin/jq" ];then
 fi
 
 if [ -d "${FIP_HOME}" ];then
-       mkdir -p lib/u-boot
-       cp -v "${FIP_HOME}"/../*.sh lib/u-boot/
-       cp -v "${FIP_HOME}"/*.sd.bin lib/u-boot/ 
+       sudo mkdir -p lib/u-boot
+       sudo cp -v "${FIP_HOME}"/../*.sh lib/u-boot/
+       sudo cp -v "${FIP_HOME}"/*.sd.bin lib/u-boot/ 
 fi
 
 [ -f $INST_SCRIPT ] && sudo cp $INST_SCRIPT root/
