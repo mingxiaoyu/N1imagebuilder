@@ -86,7 +86,6 @@ jobs:
         sudo -E apt-get -qq install git  git-core
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
-
     - name: Copy files
       run: |
         cp /opt/dl/openwrt-armvirt-64-default-rootfs.tar.gz /opt/openwrt/openwrt-armvirt-64-default-rootfs.tar.gz
@@ -113,7 +112,6 @@ jobs:
         xz -z $RELEASE_NAME
         
         echo "::set-output name=status::success"
-
     - name: Create release
       if: steps.xz.outputs.status == 'success'  &&  env.RELEASE == 'true' && !cancelled()
       uses: ncipollo/release-action@v1
