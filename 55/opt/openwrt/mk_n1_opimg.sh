@@ -333,7 +333,7 @@ fi
 [ -f $MAC_SCRIPT3 ] && sudo cp $MAC_SCRIPT3 usr/bin/
 [ -f $DAEMON_JSON ] && sudo mkdir -p "etc/docker" && sudo cp $DAEMON_JSON "etc/docker/daemon.json"
 [ -f $FORCE_REBOOT ] && sudo cp $FORCE_REBOOT usr/sbin/
-[ -f $COREMARK ] && [ -f "etc/coremark.sh" ] && sudo cp -f $COREMARK "etc/coremark.sh" && chmod 755 "etc/coremark.sh"
+[ -f $COREMARK ] && [ -f "etc/coremark.sh" ] && sudo cp -f $COREMARK "etc/coremark.sh" && sudo chmod 755 "etc/coremark.sh"
 if [ -x usr/bin/perl ];then
 	[ -f $CPUSTAT_SCRIPT ] && sudo cp $CPUSTAT_SCRIPT usr/bin/
 	[ -f $GETCPU_SCRIPT ] && sudo cp $GETCPU_SCRIPT bin/
