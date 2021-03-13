@@ -258,7 +258,7 @@ cd $TEMP_DIR/$LINUX_ROOT
 #if [ -f "${MODULES_TGZ}" ];then
 #	(cd ${TGT_ROOT}/lib/modules; tar xvzf "${MODULES_TGZ}")
 #else
-	sudo tar cf - ./lib/modules | ( cd ${TGT_ROOT};sudo  tar xf - )
+	sudo tar cf - ./lib/modules | ( cd ${TGT_ROOT}; tar xf - )
 #fi
 
 while :;do
@@ -333,7 +333,7 @@ fi
 [ -f $MAC_SCRIPT3 ] && sudo cp $MAC_SCRIPT3 usr/bin/
 [ -f $DAEMON_JSON ] && sudo mkdir -p "etc/docker" && sudo cp $DAEMON_JSON "etc/docker/daemon.json"
 [ -f $FORCE_REBOOT ] && sudo cp $FORCE_REBOOT usr/sbin/
-[ -f $COREMARK ] && [ -f "etc/coremark.sh" ] && sudo cp -f $COREMARK "etc/coremark.sh" && sudo chmod 755 "etc/coremark.sh"
+[ -f $COREMARK ] && [ -f "etc/coremark.sh" ] && sudo cp -f $COREMARK "etc/coremark.sh" && chmod 755 "etc/coremark.sh"
 if [ -x usr/bin/perl ];then
 	[ -f $CPUSTAT_SCRIPT ] && sudo cp $CPUSTAT_SCRIPT usr/bin/
 	[ -f $GETCPU_SCRIPT ] && sudo cp $GETCPU_SCRIPT bin/
@@ -345,7 +345,7 @@ fi
 if [ -f $BANNER ];then
     sudo cp -f $BANNER etc/banner
     sudo echo " Base on OpenWrt ${OPENWRT_VER} by lean & lienol" >> etc/banner
-    sudo echo " Kernel 5.4.105-mingxiaoyu-55+o  >> etc/banner
+    sudo echo " Kernel 5.4.105-mingxiaoyu-55+o " >> etc/banner
     TODAY=$(date +%Y-%m-%d)
     sudo echo " Packaged by ${WHOAMI} on ${TODAY}" >> etc/banner
     sudo echo " SOC: ${SOC}	BOARD: ${BOARD}" >> etc/banner
