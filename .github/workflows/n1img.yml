@@ -11,7 +11,7 @@ on:
       minimum_runs:
         description: 'The minimum runs to keep for each workflow.'
         required: true
-        default: 6
+        default: 3
       
 env:
   UPLOAD_COWTRANSFER: true
@@ -93,9 +93,7 @@ jobs:
         cp /opt/dl/$FLIPPY_FILENAME /opt/imgs/$FLIPPY_FILENAME
               
     - name: build img
-      run: |
-        rm -rf /opt/openwrt/tmp/${RELEASE_NAME}.xz   
-        
+      run: |        
         cd /opt/imgs
         xz -d $FLIPPY_FILENAME
         
@@ -113,6 +111,16 @@ jobs:
         xz -z $RELEASE_NAME
         
         echo "::set-output name=status::success"
+
+    - name: build Personal N1(我个人用的胖路由配置)
+      if: ${{ env.FLIPPY_NAME }} == '55'
+      run: |
+        [ -e openwrtfiles ] && mv openwrtfiles /opt/openwrt/files
+        cd /opt/openwrt
+        sed -i 's/N1_55_Openwrt.img/N1_MXY_Openwrt.img/g' mk_n1_opimg.sh
+        ./mk_n1_opimg.sh
+        cd /opt/openwrt/tmp 
+        xz -z N1_MXY_Openwrt.img
 
     - name: Create release
       if: steps.xz.outputs.status == 'success'  &&  env.RELEASE == 'true' && !cancelled()
@@ -139,15 +147,7 @@ jobs:
              5. ./update-amlogic-openwrt.sh N1_55_Openwrt.img
 
         artifacts: "/opt/openwrt/tmp/*.xz"
-        
-    - name: Upload firmware to WeTransfer
-      if: steps.xz.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress /opt/openwrt/tmp/$RELEASE_NAME.xz 2>&1 | tee cowtransfer.log
-        echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
-        echo "::set-output name=url::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
-        
+                
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
       with:
