@@ -327,7 +327,8 @@ if [ -d "${FIP_HOME}" ];then
 fi
 
 [ -f $INST_SCRIPT ] && sudo cp $INST_SCRIPT root/
-# [ -f $UPDATE_SCRIPT ] && cp $UPDATE_SCRIPT root/
+[ -f $UPDATE_SCRIPT ] && sudo cp $UPDATE_SCRIPT mnt/mmcblk2p4/
+[ -e openwrtfiles ] && sudo cp -r openwrtfiles/. /etc/config
 [ -f $MAC_SCRIPT1 ] && sudo cp $MAC_SCRIPT1 usr/bin/
 [ -f $MAC_SCRIPT2 ] && sudo cp $MAC_SCRIPT2 usr/bin/
 [ -f $MAC_SCRIPT3 ] && sudo cp $MAC_SCRIPT3 usr/bin/
