@@ -124,7 +124,20 @@ jobs:
         commit: main
         token: ${{ secrets.GITHUB_TOKEN   }}
         body: |
-          PHICOMM-N1-OpenWRT-Image 
+          默认IP：192.168.31.2 默认密码： password
+          55+o 全选安装方法：
+             1. 固件刷入U盘。
+             2. cd root
+             3. ./install-to-emmc.sh
+             4. 拔掉U盘，断电重启。
+             
+          55+o 在线升级方法：
+             1. 上传 N1_55_Openwrt.img 到/mnt/mmcblk2p4
+             2. cd /mnt/mmcblk2p4
+             3. 升级脚本下载 https://raw.githubusercontent.com/mingxiaoyu/N1imagebuilder/main/55/opt/openwrt/files/update-amlogic-openwrt.sh
+             4. chmod +x update-amlogic-openwrt.sh
+             5. ./update-amlogic-openwrt.sh N1_55_Openwrt.img
+
         artifacts: "/opt/openwrt/tmp/*.xz"
         
     - name: Upload firmware to WeTransfer
