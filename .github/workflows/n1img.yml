@@ -125,7 +125,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN   }}
         body: |
           默认IP：192.168.31.2 默认密码： password
-          55+o 全选安装方法：
+          55+o 全新刷入emmc方法：
              1. 固件刷入U盘。
              2. cd root
              3. ./install-to-emmc.sh
