@@ -112,10 +112,10 @@ jobs:
         
         echo "::set-output name=status::success"
 
-    - name: build Personal N1(我个人用的胖路由配置)
+    - name: build Personal N1(我个人用的旁路由配置)
       if: ${{ env.FLIPPY_NAME }} == '55'
       run: |
-        [ -e openwrtfiles ] && mv openwrtfiles /opt/openwrt/files
+        [ -e openwrtfiles ] && mv openwrtfiles /opt/openwrt/files/openwrtfiles
         cd /opt/openwrt
         sed -i 's/N1_55_Openwrt.img/N1_MXY_Openwrt.img/g' mk_n1_opimg.sh
         ./mk_n1_opimg.sh
@@ -126,7 +126,7 @@ jobs:
       if: steps.xz.outputs.status == 'success'  &&  env.RELEASE == 'true' && !cancelled()
       uses: ncipollo/release-action@v1
       with:
-        name: ${{ env.DATE }} 🚀 / N1-Openwrt-img | 编译
+        name: ${{ env.DATE }} / N1-Openwrt-img | 编译
         allowUpdates: true
         tag: ${{ env.version }}
         commit: main
