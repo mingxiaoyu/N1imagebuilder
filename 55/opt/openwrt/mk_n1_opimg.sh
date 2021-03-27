@@ -91,7 +91,7 @@ COREMARK="${PWD}/files/coremark.sh"
 
 # 20200930 add
 INST_SCRIPT="${PWD}/files/s905d/install-to-emmc.sh"
-UPDATE_SCRIPT="${PWD}/files/s905d/update-to-emmc.sh"
+UPDATE_SCRIPT="${PWD}/files/update-amlogic-openwrt.sh"
 SND_MOD="${PWD}/files/s905d/snd-meson-gx"
 DAEMON_JSON="${PWD}/files/s905d/daemon.json"
 
@@ -328,6 +328,7 @@ fi
 
 [ -f $INST_SCRIPT ] && sudo cp $INST_SCRIPT root/
 [ -f $UPDATE_SCRIPT ] && sudo cp $UPDATE_SCRIPT mnt/mmcblk2p4/
+[ -e openwrtfiles ] && echo "find the openwrt files"
 [ -e openwrtfiles ] && sudo cp -r openwrtfiles/. /etc/config
 [ -f $MAC_SCRIPT1 ] && sudo cp $MAC_SCRIPT1 usr/bin/
 [ -f $MAC_SCRIPT2 ] && sudo cp $MAC_SCRIPT2 usr/bin/
