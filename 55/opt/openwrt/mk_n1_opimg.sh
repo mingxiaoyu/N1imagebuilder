@@ -327,7 +327,6 @@ if [ -d "${FIP_HOME}" ];then
 fi
 
 [ -f $INST_SCRIPT ] && sudo cp $INST_SCRIPT root/
-[ -f $UPDATE_SCRIPT ] && sudo cp $UPDATE_SCRIPT mnt/mmcblk2p4/
 [ -e openwrtfiles ] && echo "find the openwrt files"
 [ -e openwrtfiles ] && sudo cp -r openwrtfiles/. /etc/config
 [ -f $MAC_SCRIPT1 ] && sudo cp $MAC_SCRIPT1 usr/bin/
@@ -405,6 +404,9 @@ sudo sed -e 's/root::/root:$1$NA6OM0Li$99nh752vw4oe7A.gkm2xk1:/' -i ./etc/shadow
 	sudo sed -e 's/services/nas/g' -i ./usr/lib/lua/luci/controller/samba4.lua && \
 	[ -f ${SMB4_PATCH} ] && \
 	sudo patch -p1 < ${SMB4_PATCH}
+
+[ -f $UPDATE_SCRIPT ] && sudo cp $UPDATE_SCRIPT mnt/mmcblk2p4/
+
 # for nfs server
 if [ -f ./etc/init.d/nfsd ];then
     sudo echo "/mnt/mmcblk2p4 *(rw,sync,no_root_squash,insecure,no_subtree_check)" > ./etc/exports
