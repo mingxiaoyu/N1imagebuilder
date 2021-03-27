@@ -113,7 +113,7 @@ jobs:
         echo "::set-output name=status::success"
 
     - name: build Personal N1(我个人用的旁路由配置)
-      if: ${{ env.FLIPPY_NAME }} == '55'
+      if:  env.FLIPPY_NAME == '55' || contains(env.FLIPPY_NAME, '55')
       run: |
         [ -e openwrtfiles ] && mv openwrtfiles /opt/openwrt/files/openwrtfiles
         cd /opt/openwrt
