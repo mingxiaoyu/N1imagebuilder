@@ -2,6 +2,9 @@
 
 基于flippy的38+o和55+o打包Phicomm N1的openwrt
 
+N1_MXY_Openwrt.img.xz 是计划我个人用的旁路由设置。目前没有完成。
+
+
 N1的openwrt来自我自己的另一个项目[N1Openwrt](https://github.com/mingxiaoyu/N1Openwrt)
 
 # 如何使用
