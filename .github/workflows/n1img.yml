@@ -25,10 +25,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - flippy_name: 38
-            flippy_filename: Armbian_20.02.0_Aml-s9xxx_buster_5.4.50-flippy-38+o.img.xz
-            flippy_url: https://github.com/mingxiaoyu/armbian_flippy/releases/download/v1.0/Armbian_20.02.0_Aml-s9xxx_buster_5.4.50-flippy-38+o.img.xz
-            release_name: N1_38_Openwrt.img
+          #- flippy_name: 38
+          #  flippy_filename: Armbian_20.02.0_Aml-s9xxx_buster_5.4.50-flippy-38+o.img.xz
+          #  flippy_url: https://github.com/mingxiaoyu/armbian_flippy/releases/download/v1.0/Armbian_20.02.0_Aml-s9xxx_buster_5.4.50-flippy-38+o.img.xz
+          #  release_name: N1_38_Openwrt.img
           - flippy_name: 55
             flippy_filename: Armbian_20.10_Aml-s9xxx_buster_5.4.105-flippy-55+o.img.xz
             flippy_url: https://github.com/mingxiaoyu/armbian_flippy/releases/download/v1.0/Armbian_20.10_Aml-s9xxx_buster_5.4.105-flippy-55+o.img.xz
@@ -116,6 +116,9 @@ jobs:
       if:  env.FLIPPY_NAME == '55' || contains(env.FLIPPY_NAME, '55')
       run: |
         [ -e openwrtfiles ] && mv openwrtfiles /opt/openwrt/files/openwrtfiles
+        cd /opt/openwrt/files/openwrtfiles
+        ls
+        echo "openwrtfiles done"
         cd /opt/openwrt
         sed -i 's/N1_55_Openwrt.img/N1_MXY_Openwrt.img/g' mk_n1_opimg.sh
         ./mk_n1_opimg.sh
