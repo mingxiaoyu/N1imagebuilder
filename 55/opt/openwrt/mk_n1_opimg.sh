@@ -122,6 +122,9 @@ WIRELESS_CONFIG="${PWD}/files/s905d/wireless"
 SS_LIB="${PWD}/files/ss-glibc/lib-glibc.tar.xz"
 SS_BIN="${PWD}/files/ss-glibc/ss-bin-glibc.tar.xz"
 JQ="${PWD}/files/jq"
+
+# mingxiaoyu add
+OPENWRTFILES="${PWD}/files/openwrtfiles"
 ###########################################################################
 
 # 检查环境
@@ -327,8 +330,8 @@ if [ -d "${FIP_HOME}" ];then
 fi
 
 [ -f $INST_SCRIPT ] && sudo cp $INST_SCRIPT root/
-[ -e openwrtfiles ] && echo "find the openwrt files"
-[ -e openwrtfiles ] && sudo cp -r openwrtfiles/. /etc/config
+[ -e $OPENWRTFILES ] && echo "find the openwrt files"
+[ -e $OPENWRTFILES ] && sudo cp -r $OPENWRTFILES/. /etc/config
 [ -f $MAC_SCRIPT1 ] && sudo cp $MAC_SCRIPT1 usr/bin/
 [ -f $MAC_SCRIPT2 ] && sudo cp $MAC_SCRIPT2 usr/bin/
 [ -f $MAC_SCRIPT3 ] && sudo cp $MAC_SCRIPT3 usr/bin/
@@ -405,7 +408,7 @@ sudo sed -e 's/root::/root:$1$NA6OM0Li$99nh752vw4oe7A.gkm2xk1:/' -i ./etc/shadow
 	[ -f ${SMB4_PATCH} ] && \
 	sudo patch -p1 < ${SMB4_PATCH}
 
-[ -f $UPDATE_SCRIPT ] && sudo cp $UPDATE_SCRIPT mnt/mmcblk2p4/
+[ -f $UPDATE_SCRIPT ] && sudo cp $UPDATE_SCRIPT /mnt/mmcblk2p4/
 
 # for nfs server
 if [ -f ./etc/init.d/nfsd ];then
