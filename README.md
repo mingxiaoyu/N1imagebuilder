@@ -1,6 +1,6 @@
 ![Build Openwrt img](https://github.com/mingxiaoyu/N1imagebuilder/workflows/Build%20Openwrt%20img/badge.svg)
 
-基于flippy的38+o和55+o打包Phicomm N1的openwrt
+基于flippy的57+o打包Phicomm N1的openwrt
 
 N1_MXY_Openwrt.img.xz 是计划我个人用的旁路由设置。目前没有完成。
 
@@ -21,7 +21,7 @@ N1的openwrt来自我自己的另一个项目[N1Openwrt](https://github.com/ming
 3. 点击Actions -> Workflows -> Run workflow -> Run workflow
 
 # N1刷emmc
-非54+o版升级到55+o版，如果一直卡在fdisk失败那里的解决办法：一是再多试几次，如果还不成功，则需要手动清空分区表然后再重试，具体命令:
+非54+o版升级到57+o版，如果一直卡在fdisk失败那里的解决办法：一是再多试几次，如果还不成功，则需要手动清空分区表然后再重试，具体命令:
 ```
   dd   if=/dev/zero   of=/dev/mmcblk2  bs=512  count=1  &&  sync
 ```
