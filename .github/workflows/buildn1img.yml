@@ -89,7 +89,7 @@ jobs:
       run: |
         sudo chmod  -R 777 /opt
         cd /opt/openwrt/tmp 
-        xz -z $RELEASE_NAME
+        xz -z openwrt.img
         
         ls
         echo "::set-output name=status::success"
