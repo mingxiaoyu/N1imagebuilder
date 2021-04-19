@@ -89,9 +89,10 @@ jobs:
       run: |
         sudo chmod  -R 777 /opt
         cd /opt/openwrt/tmp 
+        ls
+        echo "-----"
         xz -z openwrt.img
         
-        ls
         echo "::set-output name=status::success"
 #    - name: build Personal N1(我个人用的旁路由配置)
 #      run: |
