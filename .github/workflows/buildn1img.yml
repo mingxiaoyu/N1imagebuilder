@@ -84,16 +84,6 @@ jobs:
         sudo chmod +x mk_s905d_n1.sh
         sudo ./mk_s905d_n1.sh
         
-    - name: xz-z
-      id: xz
-      run: |
-        sudo chmod  -R 777 /opt
-        cd /opt/openwrt/tmp 
-        ls
-        echo "-----"
-        xz -z openwrt.img
-        
-        echo "::set-output name=status::success"
 #    - name: build Personal N1(我个人用的旁路由配置)
 #      run: |
 #        [ -e openwrtfiles ] && mv openwrtfiles /opt/openwrt/files/openwrtfiles
@@ -104,7 +94,7 @@ jobs:
 #       xz -z N1_MXY_Openwrt.img
 
     - name: Create release
-      if: steps.xz.outputs.status == 'success'  &&  env.RELEASE == 'true' && !cancelled()
+      if:  env.RELEASE == 'true' && !cancelled()
       uses: ncipollo/release-action@v1
       with:
         name: ${{ env.DATE }} / N1-Openwrt-img | 编译
