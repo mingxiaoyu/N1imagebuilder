@@ -83,8 +83,8 @@ jobs:
         cd /opt/openwrt
              
         sudo chmod +x mk_s905d_n1.sh
-        sudo ./mk_s905d_n1.sh 
-        	
+        sudo ./mk_s905d_n1.sh
+        
     - name: xz-z
       id: xz
       run: |
