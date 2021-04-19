@@ -1,13 +1,12 @@
 name: Build N1 IMG
 
 on:
-  repository_dispatch:
   workflow_dispatch:
     inputs:
       days:
         description: 'Number of days.'
         required: true
-        default: 10
+        default: 30
       minimum_runs:
         description: 'The minimum runs to keep for each workflow.'
         required: true
@@ -24,7 +23,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@main
-      
+      with:
+        ref: 57
+        
     - name: Initialization environment
       run: |     
         version=$(curl -s "https://api.github.com/repos/mingxiaoyu/N1Openwrt/releases/latest" | awk -F '"' '/tag_name/{print $4}')
