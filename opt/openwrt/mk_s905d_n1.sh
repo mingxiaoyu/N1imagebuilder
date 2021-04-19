@@ -46,7 +46,7 @@ fi
 echo "Use $OPWRT_ROOTFS_GZ as openwrt rootfs!"
 
 # 目标镜像文件
-TGT_IMG="${WORK_DIR}/openwrt.img"
+TGT_IMG="${WORK_DIR}/openwrt_k${KERNEL_VERSION}${SUBVER}.img"
 
 # 判断内核版本是否 >= 5.10
 K_VER=$(echo "$KERNEL_VERSION" | cut -d '.' -f1)
@@ -609,4 +609,6 @@ fi
 ( losetup -D && cd $WORK_DIR && rm -rf $TEMP_DIR && losetup -D)
 sync
 echo
+cd $WORK_DIR
+xz -z $TGT_IMG
 echo "镜像打包已完成，再见!"
