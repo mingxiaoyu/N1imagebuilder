@@ -49,10 +49,6 @@ jobs:
         wget  https://github.com/mingxiaoyu/N1Openwrt/releases/download/$version/openwrt-armvirt-64-default-rootfs.tar.gz 
         wget https://github.com/mingxiaoyu/armbian_flippy/releases/download/v${FLIPPY_VERSION}/kernel.tar.gz
         
-    - name: Check Files
-      run: |
-        cd /opt/dl
-        ls
                 
     - name: Install the package
       run: |
@@ -76,8 +72,7 @@ jobs:
         ls
         
     - name: build img
-      run: |        
- 
+      run: |
         sudo chmod  -R 777 /opt
         cd /opt/openwrt
              
@@ -104,18 +99,18 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN   }}
         body: |
           默认IP：192.168.31.2 默认密码： password
-          57+o 全新刷入emmc方法：
+          全新刷入emmc方法：
              1. 固件刷入U盘。
              2. cd root
              3. ./install-to-emmc.sh
              4. 拔掉U盘，断电重启。
              
-          57+o 在线升级方法：
+          在线升级方法：
              1. 上传 img 到/mnt/mmcblk2p4
              2. cd /mnt/mmcblk2p4
-             3. 升级脚本下载 https://raw.githubusercontent.com/mingxiaoyu/N1imagebuilder/main/55/opt/openwrt/files/update-amlogic-openwrt.sh
+             3. 升级脚本下载 https://github.com/mingxiaoyu/N1imagebuilder/blob/main/opt/openwrt/files/update-amlogic-openwrt.sh
              4. chmod +x update-amlogic-openwrt.sh
-             5. ./update-amlogic-openwrt.sh N1_55_Openwrt.img
+             5. ./update-amlogic-openwrt.sh xxxx.img
         artifacts: "/opt/openwrt/tmp/*.xz"
                 
     - name: Delete workflow runs

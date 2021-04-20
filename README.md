@@ -17,13 +17,25 @@ N1的openwrt来自我自己的另一个项目[N1Openwrt](https://github.com/ming
   * 找到这句version=$(curl -s "https://api.github.com/repos/mingxiaoyu/N1Openwrt/releases/latest" | awk -F '"' '/tag_name/{print $4}')
     ---> 修改为 version=$(curl -s "https://api.github.com/repos/{用户名}/{仓储名}/releases/latest" | awk -F '"' '/tag_name/{print $4}')
 
-  * 修改flippy_url 的地址（可选，本仓储使用了flippy 38+o和55+o 的打包镜像）。
+  * 修改 https://github.com/mingxiaoyu/armbian_flippy/releases/download/v${FLIPPY_VERSION}/kernel.tar.gz（可选，这个是F大的内核）
 3. 点击Actions -> Workflows -> Run workflow -> Run workflow
 
-# N1刷emmc
-非54+o版升级到57+o版，如果一直卡在fdisk失败那里的解决办法：一是再多试几次，如果还不成功，则需要手动清空分区表然后再重试，具体命令:
+# N1 U盘写入刷emmc
+```
+cd      /root
+./install-to-emmc.sh
+```
+如果一直卡在fdisk失败那里的解决办法：一是再多试几次，如果还不成功，则需要手动清空分区表然后再重试，具体命令:
 ```
   dd   if=/dev/zero   of=/dev/mmcblk2  bs=512  count=1  &&  sync
+```
+
+升级降级方法统一为：
+把 update-amlogic-openwrt.sh 及 img镜像上传至  /mnt/mmcblk2p4
+```
+cd    /mnt/mmcblk2p4
+chmod   755  update-amlogic-openwrt.sh
+./update-amlogic-openwrt.sh    xxxxx.img
 ```
 
 # 感激
