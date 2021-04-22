@@ -3,15 +3,6 @@ name: Build N1 IMG
 on:
   repository_dispatch:
   workflow_dispatch:
-    inputs:
-      days:
-        description: 'Number of days.'
-        required: false
-        default: 30
-      minimum_runs:
-        description: 'The minimum runs to keep for each workflow.'
-        required: false
-        default: 3
       
 env:
   RELEASE: true
@@ -118,8 +109,8 @@ jobs:
       uses: GitRML/delete-workflow-runs@main
       with:
           repository: ${{ github.repository }}
-          retain_days: ${{ github.event.inputs.days }}
-          keep_minimum_runs: ${{ github.event.inputs.minimum_runs }}
+          retain_days: 2
+          keep_minimum_runs: 1
 
     - name: Remove old Releases
       uses: dev-drprasad/delete-older-releases@v0.1.0
