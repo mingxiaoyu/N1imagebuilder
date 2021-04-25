@@ -71,6 +71,7 @@ jobs:
         sudo chmod +x mk_s905d_n1.sh
         sudo ./mk_s905d_n1.sh
         
+        sudo cp update-amlogic-openwrt.sh /opt/openwrt/tmp/update-amlogic-openwrt.sh
 #    - name: build Personal N1(我个人用的旁路由配置)
 #      run: |
 #        [ -e openwrtfiles ] && mv openwrtfiles /opt/openwrt/files/openwrtfiles
@@ -100,10 +101,10 @@ jobs:
           在线升级方法：
              1. 上传 img 到/mnt/mmcblk2p4
              2. cd /mnt/mmcblk2p4
-             3. 升级脚本下载 https://github.com/mingxiaoyu/N1imagebuilder/blob/main/opt/openwrt/files/update-amlogic-openwrt.sh
+             3. 升级脚本下载 update-amlogic-openwrt.sh
              4. chmod +x update-amlogic-openwrt.sh
              5. ./update-amlogic-openwrt.sh xxxx.img
-        artifacts: "/opt/openwrt/tmp/*.xz"
+        artifacts: "/opt/openwrt/tmp/*"
                 
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
