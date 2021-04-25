@@ -71,7 +71,7 @@ jobs:
         sudo chmod +x mk_s905d_n1.sh
         sudo ./mk_s905d_n1.sh
         
-        sudo cp update-amlogic-openwrt.sh /opt/openwrt/tmp/update-amlogic-openwrt.sh
+        sudo cp files/update-amlogic-openwrt.sh /opt/openwrt/tmp/update-amlogic-openwrt.sh
 #    - name: build Personal N1(我个人用的旁路由配置)
 #      run: |
 #        [ -e openwrtfiles ] && mv openwrtfiles /opt/openwrt/files/openwrtfiles
