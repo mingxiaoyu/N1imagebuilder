@@ -1,9 +1,6 @@
 ![Build Openwrt img](https://github.com/mingxiaoyu/N1imagebuilder/workflows/Build%20Openwrt%20img/badge.svg)
 
-基于flippy的57+o打包Phicomm N1的openwrt
-
-N1_MXY_Openwrt.img.xz 是计划我个人用的旁路由设置。目前没有完成。
-
+基于flippy的58+o打包Phicomm N1的openwrt
 
 N1的openwrt来自我自己的另一个项目[N1Openwrt](https://github.com/mingxiaoyu/N1Openwrt)
 
@@ -43,7 +40,6 @@ chmod   755  update-amlogic-openwrt.sh
  * [coolsnowwolf/Lede](https://github.com/coolsnowwolf/lede)
 
 # 特别说明
-  * 关于N1的云打包，我在36+o就已经开始做好了，不过那时候的版本不能写到emmc。直到GitHub 支持Ubuntu20之后才做到支持写emmc。也在那个时候把它从私有仓储改为公共仓储。也做了仓储的重置。应该是第一个云打包。flippy大大有点小懒，直接用root。
   * 我对flippy内核，基本的态度是一般小版本的提升。不会提升多少的性能。约一下。。基本等于零。对于要更新科学上网的，可以单独更新[IPK](https://github.com/mingxiaoyu/lede-ssr-plus) 。没必要刷机，那么复杂。欢迎大家去下载。
   * 一般隔一段时间，我会基于上述flippy版本，更新openwrt。没特别原因不会更新flippy的内核
 

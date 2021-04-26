@@ -10,3 +10,4 @@ TGT_IMG="${WORK_DIR}/openwrt_${SOC}_${BOARD}_${OPENWRT_VER}_k${KERNEL_VERSION}${
 
 cd $WORK_DIR
 xz -z $TGT_IMG
+rm -rf TGT_IMG

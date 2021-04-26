@@ -51,7 +51,7 @@ jobs:
         sudo -E apt-get -qq clean
         
      
-    - name: build img
+    - name: Build img
       run: |
         sudo chmod  -R 777 /opt
         cd /opt/openwrt
