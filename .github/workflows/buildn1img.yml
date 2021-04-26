@@ -71,15 +71,11 @@ jobs:
         sudo chmod +x mk_s905d_n1.sh
         sudo ./mk_s905d_n1.sh
         
+        sudo chmod +x zip_n1.sh
+        sudo ./zip_n1.sh
+        
         sudo cp files/update-amlogic-openwrt.sh /opt/openwrt/tmp/update-amlogic-openwrt.sh
-#    - name: build Personal N1(我个人用的旁路由配置)
-#      run: |
-#        [ -e openwrtfiles ] && mv openwrtfiles /opt/openwrt/files/openwrtfiles
-#        cd /opt/openwrt
-#        sed -i 's/N1_55_Openwrt.img/N1_MXY_Openwrt.img/g' mk_n1_opimg.sh
-#        ./mk_n1_opimg.sh
-#        cd /opt/openwrt/tmp 
-#       xz -z N1_MXY_Openwrt.img
+
 
     - name: Create release
       if:  env.RELEASE == 'true' && !cancelled()

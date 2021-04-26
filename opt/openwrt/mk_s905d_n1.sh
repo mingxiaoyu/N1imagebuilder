@@ -609,6 +609,4 @@ fi
 ( losetup -D && cd $WORK_DIR && rm -rf $TEMP_DIR && losetup -D)
 sync
 echo
-cd $WORK_DIR
-xz -z $TGT_IMG
 echo "镜像打包已完成，再见!"
