@@ -46,7 +46,7 @@ fi
 echo "Use $OPWRT_ROOTFS_GZ as openwrt rootfs!"
 
 # 目标镜像文件
-TGT_IMG="${WORK_DIR}/openwrt_k${KERNEL_VERSION}${SUBVER}.img"
+TGT_IMG="${WORK_DIR}/openwrt_${SOC}_${BOARD}_${OPENWRT_VER}_k${KERNEL_VERSION}${SUBVER}.img"
 
 # 判断内核版本是否 >= 5.10
 K_VER=$(echo "$KERNEL_VERSION" | cut -d '.' -f1)
@@ -90,7 +90,7 @@ COREMARK="${PWD}/files/coremark.sh"
 
 # 20200930 add
 INST_SCRIPT="${PWD}/files/s905d/install-to-emmc.sh"
-UPDATE_SCRIPT="${PWD}/files/update-amlogic-openwrt.sh"
+UPDATE_SCRIPT="${PWD}/files/s905d/update-to-emmc.sh"
 SND_MOD="${PWD}/files/s905d/snd-meson-gx"
 DAEMON_JSON="${PWD}/files/s905d/daemon.json"
 
@@ -132,8 +132,6 @@ BOOTFILES_HOME="${PWD}/files/bootfiles/amlogic"
 GET_RANDOM_MAC="${PWD}/files/get_random_mac.sh"
 ###########################################################################
 
-# mingxiaoyu add
-OPENWRTFILES="${PWD}/files/openwrtfiles"
 # 检查环境
 if [ $(id -u) -ne 0 ];then
 	echo "这个脚本需要用root用户来执行，你好象不是root吧？"
@@ -350,8 +348,6 @@ fi
 
 [ -f $INST_SCRIPT ] && cp $INST_SCRIPT root/
 # [ -f $UPDATE_SCRIPT ] && cp $UPDATE_SCRIPT root/
-[ -e $OPENWRTFILES ] && sudo cp -r $OPENWRTFILES/. /etc/config
-[ -f $UPDATE_SCRIPT ] && cp $UPDATE_SCRIPT /mnt/mmcblk2p4/
 [ -f $MAC_SCRIPT1 ] && cp $MAC_SCRIPT1 usr/bin/
 [ -f $MAC_SCRIPT2 ] && cp $MAC_SCRIPT2 usr/bin/
 [ -f $MAC_SCRIPT3 ] && cp $MAC_SCRIPT3 usr/bin/

@@ -6,7 +6,7 @@ on:
       
 env:
   RELEASE: true
-  FLIPPY_VERSION: 57
+  FLIPPY_VERSION: 58
  
 jobs:
   build:
@@ -36,12 +36,13 @@ jobs:
             
     - name: Download
       run: |
-        cd /opt/dl
+        cd /opt/openwrt        
+        wget  https://github.com/mingxiaoyu/N1Openwrt/releases/download/$version/openwrt-armvirt-64-default-rootfs.tar.gz         
         
-        wget  https://github.com/mingxiaoyu/N1Openwrt/releases/download/$version/openwrt-armvirt-64-default-rootfs.tar.gz 
-        wget https://github.com/mingxiaoyu/armbian_flippy/releases/download/v${FLIPPY_VERSION}/kernel.tar.gz
+        cd /opt/kernel
+        wget $(curl -s https://api.github.com/repos/mingxiaoyu/armbian_flippy/releases/tags/v${FLIPPY_VERSION} | grep browser_download_url | cut -d '"' -f 4)
+        ls
         
-                
     - name: Install the package
       run: |
         sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
@@ -50,19 +51,8 @@ jobs:
         sudo -E apt-get -qq install git  git-core
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
-    - name: Copy files
-      run: |
-        cp /opt/dl/openwrt-armvirt-64-default-rootfs.tar.gz /opt/openwrt/openwrt-armvirt-64-default-rootfs.tar.gz
-        cp /opt/dl/kernel.tar.gz /opt/kernel.tar.gz
-       
-    - name: tar kernel
-      run: |
-        cd /opt
-        sudo tar xvzf kernel.tar.gz  
-       
-        cd /opt/kernel
-        ls
         
+     
     - name: build img
       run: |
         sudo chmod  -R 777 /opt
