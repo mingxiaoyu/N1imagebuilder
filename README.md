@@ -14,7 +14,6 @@ N1的openwrt来自我自己的另一个项目[N1Openwrt](https://github.com/ming
   * 找到这句version=$(curl -s "https://api.github.com/repos/mingxiaoyu/N1Openwrt/releases/latest" | awk -F '"' '/tag_name/{print $4}')
     ---> 修改为 version=$(curl -s "https://api.github.com/repos/{用户名}/{仓储名}/releases/latest" | awk -F '"' '/tag_name/{print $4}')
 
-  * 修改 https://github.com/mingxiaoyu/armbian_flippy/releases/download/v${FLIPPY_VERSION}/kernel.tar.gz（可选，这个是F大的内核）
 3. 点击Actions -> Workflows -> Run workflow -> Run workflow
 
 # N1 U盘写入刷emmc
