@@ -28,11 +28,9 @@ jobs:
         sudo chmod  -R 777 /opt
         cp -r opt/* /opt
         
-        test -d /opt/dl || mkdir -p /opt/dl
-        sudo chmod  -R 777 /opt/dl
-        
-        cd /opt
-        mkdir imgs  
+        test -d /opt/kernel || mkdir -p /opt/kernel
+        sudo chmod  -R 777 /opt/kernel
+
             
     - name: Download
       run: |
