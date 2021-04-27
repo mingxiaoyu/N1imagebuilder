@@ -4,6 +4,9 @@
 
 N1的openwrt来自我自己的另一个项目[N1Openwrt](https://github.com/mingxiaoyu/N1Openwrt)
 
+# APP List
+ ![applist](https://github.com/mingxiaoyu/N1Openwrt/blob/master/imgs/mini.jpg?raw=true)
+ 
 # 如何使用
 
 1. fork项目
