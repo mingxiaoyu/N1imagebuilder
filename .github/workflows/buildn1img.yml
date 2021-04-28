@@ -11,7 +11,15 @@ env:
 jobs:
   build:
     runs-on: ubuntu-20.04
-    
+    name: Build for FLIPPY ${{ env.FLIPPY_VERSION }} ${{ matrix.sub_version }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - sub_version: mini
+          - sub_version: plus
+   env:
+      SUB_VERSION: ${{ matrix.sub_version }}             
     steps:
     - name: Checkout
       uses: actions/checkout@main
@@ -35,8 +43,8 @@ jobs:
     - name: Download
       run: |
         cd /opt/openwrt        
-        wget  https://github.com/mingxiaoyu/N1Openwrt/releases/download/$version/openwrt-armvirt-64-default-rootfs.tar.gz         
-        
+        wget  https://github.com/mingxiaoyu/N1Openwrt/releases/download/$version/openwrt-armvirt-64-default-rootfs-${SUB_VERSION}.tar.gz   
+        mv openwrt-armvirt-64-default-rootfs-${SUB_VERSION}.tar.gz openwrt-armvirt-64-default-rootfs.tar.gz
         cd /opt/kernel
         wget $(curl -s https://api.github.com/repos/mingxiaoyu/armbian_flippy/releases/tags/v${FLIPPY_VERSION} | grep browser_download_url | cut -d '"' -f 4)
         ls
@@ -55,12 +63,12 @@ jobs:
       run: |
         sudo chmod  -R 777 /opt
         cd /opt/openwrt
-             
-        sudo chmod +x mk_s905d_n1.sh
-        sudo ./mk_s905d_n1.sh
+        
+        sudo chmod +x mk_s905d_n1.sh 
+        sudo ./mk_s905d_n1.sh _${SUB_VERSION}
         
         sudo chmod +x zip_n1.sh
-        sudo ./zip_n1.sh
+        sudo ./zip_n1.sh _${SUB_VERSION}
         
         sudo cp files/update-amlogic-openwrt.sh /opt/openwrt/tmp/update-amlogic-openwrt.sh
 
@@ -88,6 +96,7 @@ jobs:
              3. 升级脚本下载 update-amlogic-openwrt.sh
              4. chmod +x update-amlogic-openwrt.sh
              5. ./update-amlogic-openwrt.sh xxxx.img
+             
         artifacts: "/opt/openwrt/tmp/*"
                 
     - name: Delete workflow runs
