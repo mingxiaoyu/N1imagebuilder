@@ -18,8 +18,10 @@ jobs:
         include:
           - sub_version: mini
           - sub_version: plus
-   env:
-      SUB_VERSION: ${{ matrix.sub_version }}             
+          
+    env:
+      SUB_VERSION: ${{ matrix.sub_version }}    
+  
     steps:
     - name: Checkout
       uses: actions/checkout@main
@@ -38,8 +40,7 @@ jobs:
         
         test -d /opt/kernel || mkdir -p /opt/kernel
         sudo chmod  -R 777 /opt/kernel
-
-            
+         
     - name: Download
       run: |
         cd /opt/openwrt        
@@ -56,8 +57,7 @@ jobs:
         sudo -E apt-get -qq install xz-utils btrfs-progs gawk zip unzip curl dosfstools  uuid-runtime
         sudo -E apt-get -qq install git  git-core
         sudo -E apt-get -qq autoremove --purge
-        sudo -E apt-get -qq clean
-        
+        sudo -E apt-get -qq clean      
      
     - name: Build img
       run: |
@@ -71,7 +71,6 @@ jobs:
         sudo ./zip_n1.sh _${SUB_VERSION}
         
         sudo cp files/update-amlogic-openwrt.sh /opt/openwrt/tmp/update-amlogic-openwrt.sh
-
 
     - name: Create release
       if:  env.RELEASE == 'true' && !cancelled()
