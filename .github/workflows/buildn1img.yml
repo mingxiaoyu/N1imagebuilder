@@ -11,7 +11,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-20.04
-    name: Build for FLIPPY ${{ env.FLIPPY_VERSION }} ${{ matrix.sub_version }}
+    name: Build for ${{ matrix.sub_version }}
     strategy:
       fail-fast: false
       matrix:
