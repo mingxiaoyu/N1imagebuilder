@@ -8,6 +8,11 @@ N1Openwrt仅仅编译为OpenWrt，不能直接为N1所用。必须通过N1imageb
 
 基于flippy的58+o打包Phicomm N1的openwrt
 
+用户名和密码
+User: root
+Password: password
+Default IP: 192.168.32.2
+
 # APP List
  ![applist](https://github.com/mingxiaoyu/N1Openwrt/blob/master/imgs/mini.jpg?raw=true)
  
