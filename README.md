@@ -13,7 +13,7 @@ User: root
 Password: password
 Default IP: 192.168.32.2
 
-# APP List
+# APP List（mini版）
  ![applist](https://github.com/mingxiaoyu/N1Openwrt/blob/master/imgs/mini.jpg?raw=true)
  
 # 如何使用
