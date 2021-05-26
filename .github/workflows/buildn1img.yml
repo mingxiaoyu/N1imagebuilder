@@ -6,7 +6,6 @@ on:
       
 env:
   RELEASE: true
-  FLIPPY_VERSION: 58
  
 jobs:
   build:
