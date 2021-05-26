@@ -34,7 +34,12 @@ jobs:
         
         echo "version=$version"  >> $GITHUB_ENV
         echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")"  >> $GITHUB_ENV
-  
+        
+        sudo mkdir -p /upload
+        sudo chown $USER:$GROUPS /upload
+        
+        cd /upload
+        echo "UPLOAD=$PWD" >> $GITHUB_ENV
     - name: Install the package
       run: |
         sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
@@ -77,7 +82,7 @@ jobs:
              5. gzip -d  xxxx.img.gz
              6. ./update-amlogic-openwrt.sh xxxx.img
              
-        artifacts: "/opt/openwrt/tmp/*"
+        artifacts: "${{ env.UPLOAD }}/*"
                 
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
