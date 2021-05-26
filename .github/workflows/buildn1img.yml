@@ -34,22 +34,7 @@ jobs:
         
         echo "version=$version"  >> $GITHUB_ENV
         echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")"  >> $GITHUB_ENV
-        
-        sudo chmod  -R 777 /opt
-        cp -r opt/* /opt
-        
-        test -d /opt/kernel || mkdir -p /opt/kernel
-        sudo chmod  -R 777 /opt/kernel
-         
-    - name: Download
-      run: |
-        cd /opt/openwrt        
-        wget  https://github.com/mingxiaoyu/N1Openwrt/releases/download/$version/openwrt-armvirt-64-default-rootfs-${SUB_VERSION}.tar.gz   
-        mv openwrt-armvirt-64-default-rootfs-${SUB_VERSION}.tar.gz openwrt-armvirt-64-default-rootfs.tar.gz
-        cd /opt/kernel
-        wget $(curl -s https://api.github.com/repos/mingxiaoyu/armbian_flippy/releases/tags/v${FLIPPY_VERSION} | grep browser_download_url | cut -d '"' -f 4)
-        ls
-        
+  
     - name: Install the package
       run: |
         sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
@@ -60,8 +45,6 @@ jobs:
         sudo -E apt-get -qq clean
         
     - name: Package OpenWrt with flippy script
-      # You may pin to the exact commit or the version.
-      # uses: mingxiaoyu/package-flippy-openwrt@7d497ae06a36a1af9b5c7c21ae2ae566f5a2c6f3
       uses: mingxiaoyu/package-flippy-openwrt@main
       with:
         types: s905d
