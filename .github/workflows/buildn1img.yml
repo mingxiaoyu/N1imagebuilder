@@ -57,21 +57,18 @@ jobs:
         sudo -E apt-get -qq install xz-utils btrfs-progs gawk zip unzip curl dosfstools  uuid-runtime
         sudo -E apt-get -qq install git  git-core
         sudo -E apt-get -qq autoremove --purge
-        sudo -E apt-get -qq clean      
-     
-    - name: Build img
-      run: |
-        sudo chmod  -R 777 /opt
-        cd /opt/openwrt
+        sudo -E apt-get -qq clean
         
-        sudo chmod +x mk_s905d_n1.sh 
-        sudo ./mk_s905d_n1.sh _${SUB_VERSION}
+    - name: Package OpenWrt with flippy script
+      # You may pin to the exact commit or the version.
+      # uses: mingxiaoyu/package-flippy-openwrt@7d497ae06a36a1af9b5c7c21ae2ae566f5a2c6f3
+      uses: mingxiaoyu/package-flippy-openwrt@main
+      with:
+        types: s905d
+        out: ${{ env.UPLOAD }}
+        sub-name: ${{ env.SUB_VERSION}}
+        openwrt-url: https://github.com/mingxiaoyu/N1Openwrt/releases/download/$version/openwrt-armvirt-64-default-rootfs-${SUB_VERSION}.tar.gz 
         
-        sudo chmod +x zip_n1.sh
-        sudo ./zip_n1.sh _${SUB_VERSION}
-        
-        sudo cp files/update-amlogic-openwrt.sh /opt/openwrt/tmp/update-amlogic-openwrt.sh
-
     - name: Create release
       if:  env.RELEASE == 'true' && !cancelled()
       uses: ncipollo/release-action@v1
@@ -94,7 +91,8 @@ jobs:
              2. cd /mnt/mmcblk2p4
              3. 升级脚本下载 update-amlogic-openwrt.sh
              4. chmod +x update-amlogic-openwrt.sh
-             5. ./update-amlogic-openwrt.sh xxxx.img
+             5. gzip -d  xxxx.img.gz
+             6. ./update-amlogic-openwrt.sh xxxx.img
              
         artifacts: "/opt/openwrt/tmp/*"
                 
