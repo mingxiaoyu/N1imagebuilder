@@ -6,7 +6,9 @@ N1Openwrt仅仅编译为OpenWrt，不能直接为N1所用。必须通过N1imageb
 
 # mini版和plus（高大全）的处理方式，学习的了要求不高，请请请在感谢列表里加上我的名字。
 
-基于flippy的58+o打包Phicomm N1的openwrt
+# 之前fork过我的，要特别注意下。现在改用*mingxiaoyu/package-flippy-openwrt@main*的方式进行打包。之前的库删了，要重新fork了。
+
+基于flippy的内核打包的openwrt
 
 用户名和密码
 User: root
@@ -19,7 +21,7 @@ Default IP: 192.168.32.2
 # 如何使用
 
 1. fork项目
-2. 修改n1img.yml文件 
+2. 修改buildn1img.yml文件 
   * 找到这句 wget  https://github.com/mingxiaoyu/N1Openwrt/releases/download/$version/openwrt-armvirt-64-default-rootfs.tar.gz
     ---> 修改为 wget [openert的URL]
 
@@ -27,6 +29,7 @@ Default IP: 192.168.32.2
     ---> 修改为 version=$(curl -s "https://api.github.com/repos/{用户名}/{仓储名}/releases/latest" | awk -F '"' '/tag_name/{print $4}')
 
 3. 点击Actions -> Workflows -> Run workflow -> Run workflow
+4. **如果要只编译一个版本，可以把 - sub_version: plus 删掉.**
 
 # N1 U盘写入刷emmc
 ```
