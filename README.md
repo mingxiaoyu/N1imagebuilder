@@ -1,8 +1,10 @@
 ![Build Openwrt img](https://github.com/mingxiaoyu/N1imagebuilder/workflows/Build%20Openwrt%20img/badge.svg)
 
-
 [N1Openwrt](https://github.com/mingxiaoyu/N1Openwrt)和[N1imagebuilder](https://github.com/mingxiaoyu/N1imagebuilder)是关联项目。
 N1Openwrt仅仅编译为OpenWrt，不能直接为N1所用。必须通过N1imagebuilder打包成img
+
+# 2021-5-27
+**现在用mingxiaoyu/package-flippy-openwrt的方式打包。这个项目停止维护。所有的编译和打包都在N1Openwrt进行。想自己单独打包的还可以进行fork。**
 
 # mini版和plus（高大全）的处理方式，学习的了要求不高，请请请在感谢列表里加上我的名字。
 
